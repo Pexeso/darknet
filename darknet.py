@@ -31,6 +31,9 @@ from ctypes import *
 import math
 import random
 import os
+import pdb
+import cv2
+import numpy as np
 
 def sample(probs):
     s = sum(probs)
@@ -250,10 +253,12 @@ def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45, debug= False):
     Performs the meat of the detection
     """
     #pylint: disable= C0321
-    im = load_image(image, 0, 0)
+    # im = load_image(image, 0, 0)
+    img = cv2.imread(image.decode('utf-8'))
+    im, arr = array_to_image(img)
     if debug: print("Loaded image")
     ret = detect_image(net, meta, im, thresh, hier_thresh, nms, debug)
-    free_image(im)
+    # free_image(im)
     if debug: print("freed image")
     return ret
 
@@ -522,6 +527,9 @@ def performBatchDetect(thresh= 0.25, configPath = "./cfg/yolov4.cfg", weightPath
     return batch_boxes, batch_scores, batch_classes    
 
 if __name__ == "__main__":
-    print(performDetect())
+    # print(performDetect())
+    print(performDetect(imagePath='fire_hydrant.jpg', thresh=0.1, \
+            configPath='cfg/yolo-obj.cfg', weightPath=\
+            'backup/yolo-obj_best.weights', metaPath='obj.data', showImage=False))
     #Uncomment the following line to see batch inference working 
     #print(performBatchDetect())

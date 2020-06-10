@@ -9,6 +9,9 @@
 *.dll
 *.lib
 *.dylib
+*.txt
+*.pkl
+*.jpg
 mnist/
 data/
 caffe/
@@ -33,6 +36,8 @@ build/detect_cuda_compute_capabilities.cu
 build/.ninja_deps
 build/.ninja_log
 build/Makefile
+results/*
+*.list
 
 # OS Generated #
 .DS_Store*
